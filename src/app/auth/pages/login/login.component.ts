@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginGettersFields } from 'src/app/shared/getters/login-getters';
 import { RegExpValidation } from 'src/app/shared/regex/regex';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -14,22 +16,23 @@ export class LoginComponent implements OnInit, OnDestroy {
   formLogin!: FormGroup;
   validateField!: LoginGettersFields;
   visibilityEye = false;
-  private subscription = new Subscription();
+  private _subscription = new Subscription();
 
   constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    ) { }
+    private _fb: FormBuilder,
+    private _router: Router,
+    private _loginService: LoginService,
+    private _snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.initFormLogin();
   }
 
   initFormLogin() {
-    this.formLogin = this.fb.group({
+    this.formLogin = this._fb.group({
       email: ['', [Validators.required, Validators.pattern(RegExpValidation.email)]],
       password: ['', [Validators.required]],
-      returnSecureToken: [true]
     })
     this.validateField = new LoginGettersFields(this.formLogin);
   }
@@ -39,10 +42,20 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.formLogin.markAllAsTouched();
       return;
     }
+    this._loginService.login(this.formLogin.value)
+      .subscribe(resp => {
+        if (resp) {
+          // this.router.navigate(['/admin'])
+        } else {
+          this._snackBar.open('Error no tienes permisos', 'OK', {
+            duration: 5000,
+          });
+        }
+      })
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this._subscription.unsubscribe();
   }
 
 }

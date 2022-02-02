@@ -5,6 +5,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     LoginRoutingModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ]
 })
 export class LoginModule { }
