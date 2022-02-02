@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { CustomersRoutingModule } from './customers-routing.module';
 import { CustomersComponent } from './customers.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from 'src/app/shared/material/material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -11,7 +14,10 @@ import { CustomersComponent } from './customers.component';
   ],
   imports: [
     CommonModule,
-    CustomersRoutingModule
+    CustomersRoutingModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    HttpClientModule,
   ]
 })
 export class CustomersModule { }
