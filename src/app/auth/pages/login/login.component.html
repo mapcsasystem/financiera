@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+  <span>FINANCIERA</span>
+  <span class="span-spacer"></span>
+</mat-toolbar>
+<form class="container" [formGroup]="formLogin" (ngSubmit)="login()" autocomplete="off">
+  <mat-card class="container--card">
+    <mat-card-title class="container--card__title">
+      INICIO DE SESION
+    </mat-card-title>
+    <mat-card-content>
+      <mat-form-field appearance="outline" id="emailId" class="container--card__field">
+        <mat-label>Correo electrònico</mat-label>
+        <input matInput type="email" placeholder="Correo electrònico" formControlName="email" />
+        <mat-icon matSuffix>mail</mat-icon>
+        <mat-error *ngIf="
+              validateField.email?.invalid &&
+              (validateField.email?.dirty || validateField.email?.touched)
+            ">
+          <span *ngIf="validateField.email?.hasError('required')">
+            Campo requerido.
+          </span>
+          <span *ngIf="validateField.email?.hasError('pattern')">
+            Introduce un correo electrònico valido.
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" id="passwordId" class="container--card__field">
+        <mat-label>Contraseña</mat-label>
+        <input matInput [type]="visibilityEye?'text':'password'" placeholder="Contraseña" formControlName="password">
+        <mat-icon matSuffix
+          [color]="validateField.password?.invalid && (validateField.password?.dirty || validateField.password?.touched)?'warn':''"
+          (click)="visibilityEye=!visibilityEye">
+          {{visibilityEye?'visibility':'visibility_off'}}
+        </mat-icon>
+        <mat-error *ngIf="
+              validateField.password?.invalid &&
+              (validateField.password?.dirty || validateField.password?.touched)
+            ">
+          <span *ngIf="validateField.password?.hasError('required')">
+            Campo requerido.
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" class="container--card__button">
+        LOGIN
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>
