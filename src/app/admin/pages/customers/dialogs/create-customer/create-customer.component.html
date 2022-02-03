@@ -1,0 +1,74 @@
+<h2 mat-dialog-title class="title">
+    <div class="title--icon">
+        <mat-icon class="title--icon__margin-icon">add_circle</mat-icon>
+        AGREGAR CLIENTE
+    </div>
+    <div>
+        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" (click)="closeDialog()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</h2>
+<form [formGroup]="formData" autocomplete="off">
+    <mat-dialog-content class="mat-typography">
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre Completo</mat-label>
+            <input matInput type="text" placeholder="Nombre Completo" formControlName="fullName" />
+            <mat-error *ngIf="
+                  validateField.fullName?.invalid &&
+                  (validateField.fullName?.dirty || validateField.fullName?.touched)
+                ">
+                <span *ngIf="validateField.fullName?.hasError('required')">
+                    Campo requerido.
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Dirección</mat-label>
+            <input matInput type="text" placeholder="Dirección" formControlName="address" />
+            <mat-error *ngIf="
+                  validateField.address?.invalid &&
+                  (validateField.address?.dirty || validateField.address?.touched)
+                ">
+                <span *ngIf="validateField.address?.hasError('required')">
+                    Campo requerido.
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Edad</mat-label>
+            <input matInput type="number" placeholder="Edad" formControlName="age" />
+            <mat-error *ngIf="
+                  validateField.age?.invalid &&
+                  (validateField.age?.dirty || validateField.age?.touched)
+                ">
+                <span *ngIf="validateField.age?.hasError('required')">
+                    Campo requerido.
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Género</mat-label>
+            <mat-select>
+                <mat-option value="Masculino">Masculino</mat-option>
+                <mat-option value="Femenino">Femenino</mat-option>
+            </mat-select>
+            <mat-error *ngIf="
+                  validateField.gender?.invalid &&
+                  (validateField.gender?.dirty || validateField.gender?.touched)
+                ">
+                <span *ngIf="validateField.gender?.hasError('required')">
+                    Campo requerido.
+                </span>
+            </mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-raised-button color="warn" (click)="closeDialog()">
+            CERRAR
+        </button>
+        <button mat-raised-button color="primary" type="submit">
+            GUARDAR
+        </button>
+    </mat-dialog-actions>
+</form>

@@ -1,1 +1,151 @@
-<p>customers works!</p>
+<mat-card class="mat-elevation-z0">
+    <mat-card-title>ALTA DE CLIENTE</mat-card-title>
+    <mat-card-actions align="end">
+        <button mat-raised-button color="primary" (click)="openDialog()">
+            AGREGAR CLIENTE
+        </button>
+    </mat-card-actions>
+    <mat-card-content>
+         <div class="table-container mat-elevation-z8">
+            <table mat-table [dataSource]="customersDataSource" matSort style="width: 100%">
+                <ng-container matColumnDef="id" [sticky]="false">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        id
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center">
+                        {{ element.id }}
+                    </td>
+                </ng-container>
+<!--
+                <ng-container matColumnDef="fechaDefuncion" [sticky]="false">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        FECHA DE DEFUNCION
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center">
+                        {{ element.fechaDefuncion.seconds*1000 | date :"fullDate" }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="horaDefuncion" [sticky]="false">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        HORA DE DEFUNCION
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center">
+                        {{ element.horaDefuncion | timeFormat }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="nombreDifunto" [sticky]="false">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        NOMBRE DEL DIFUNTO
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center">
+                        {{ element.nombreDifunto }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="domicilioDelServicio" [sticky]="false">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        DOMICILIO DEL SERVICIO
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center">
+                        {{ element.domicilioDelServicio }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="responsableDelDifunto" [sticky]="false">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        RESPONSABLE DEL DIFUNTO
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center">
+                        {{ element.responsableDelDifunto }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="domicilioDelResponsable" [sticky]="false">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        DOMICILIO DEL RESPONSABLE
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center">
+                        {{ element.domicilioDelResponsable }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="precio" [sticky]="false">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>PRECIO</th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center">
+                        {{ element.precio | moneyPipe }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaDelContrato" [sticky]="false">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        FECHA DEL CONTRATO
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center">
+                        {{ element.fechaDelContrato.seconds*1000 | date :"fullDate" }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaDeProrroga" [sticky]="false">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        FECHA DE PRORROGA
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center">
+                        {{ element.fechaDeProrroga.seconds*1000 | date :"fullDate" }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="abono" [sticky]="false">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>ABONO</th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center">
+                        {{ element.abono | moneyPipe }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="observaciones" [sticky]="false">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        OBSERVACIONES
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center">
+                        {{ element.observaciones }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions" [stickyEnd]="true">
+                    <th mat-header-cell *matHeaderCellDef style="
+                    padding-left: 10px;
+                    border-left: 1px solid black;
+                    border-bottom: 1px solid black;
+                  ">
+                        ACCIONES
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+                        <ion-button [matMenuTriggerFor]="menuServiciosActions" fill="clear">
+                            <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+                        </ion-button>
+                        <mat-menu #menuServiciosActions="matMenu">
+                            <button mat-menu-item>
+                                <mat-icon>mode_edit</mat-icon>
+                                <span>Editar</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon>preview</mat-icon>
+                                <span>Ver detalle</span>
+                            </button>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+-->
+                <tr mat-header-row *matHeaderRowDef="customersDisplayedColumns; sticky: true"></tr>
+
+                <tr mat-row *matRowDef="let row; columns: customersDisplayedColumns"></tr>
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="16">No se encontraron resultados.</td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>
