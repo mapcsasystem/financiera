@@ -21,7 +21,8 @@ export class SavingAccountsComponent implements OnInit, OnDestroy, AfterViewInit
     'estado',
     'fechaUltimaAct',
     'numeroCuenta',
-    'saldo'
+    'saldo',
+    'transacciones'
   ];
 
   savingAccountsDataSource = new MatTableDataSource<SavingAccountsModel>();

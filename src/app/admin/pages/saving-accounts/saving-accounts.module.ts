@@ -6,11 +6,19 @@ import { SavingAccountsComponent } from './saving-accounts.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CreateSavingAccountsComponent } from './dialogs/create-saving-accounts/create-saving-accounts.component';
+import { TransactionDepositComponent } from './dialogs/transaction-deposit/transaction-deposit.component';
+import { TransactionRetirementComponent } from './dialogs/transaction-retirement/transaction-retirement.component';
+import { TransactionHistoryComponent } from './dialogs/transaction-history/transaction-history.component';
 
 
 @NgModule({
   declarations: [
-    SavingAccountsComponent
+    SavingAccountsComponent,
+    CreateSavingAccountsComponent,
+    TransactionDepositComponent,
+    TransactionRetirementComponent,
+    TransactionHistoryComponent
   ],
   imports: [
     CommonModule,
