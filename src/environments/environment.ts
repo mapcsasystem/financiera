@@ -9,6 +9,10 @@ export const environment = {
       url:'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword',
       key:'AIzaSyB-p8CKoaQr097NJ8YJRpoWpezJj5xRRUI'
     },
+    savingAccounts:{
+      url:'https://mibanco-333616-default-rtdb.firebaseio.com/cuentaAhorro/OcBMnUGvAqVlUOskPph6ZIDpDqj2.json',
+      auth:'token'
+    },
     customers:'https://us-central1-servicios-funerarios-sama.cloudfunctions.net/customers',
   }
 };
