@@ -81,6 +81,11 @@ export class CustomersComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.customersDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
