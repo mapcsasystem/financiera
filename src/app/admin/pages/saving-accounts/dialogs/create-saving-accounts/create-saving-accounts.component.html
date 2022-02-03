@@ -1,0 +1,88 @@
+<h2 mat-dialog-title class="title">
+    <div class="title--icon">
+        <mat-icon class="title--icon__margin-icon">add_circle</mat-icon>
+        AGREGAR CUENTA DE AHORRO
+    </div>
+    <div>
+        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" (click)="closeDialog()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</h2>
+<form [formGroup]="formData" (ngSubmit)="save()" autocomplete="off">
+    <mat-dialog-content class="mat-typography">
+        <mat-form-field appearance="outline">
+            <mat-label>Estado</mat-label>
+            <input matInput type="text" readonly placeholder="Nombre Completo" formControlName="estado" />
+            <mat-error *ngIf="
+            validateField.estado?.invalid &&
+            (validateField.estado?.dirty || validateField.estado?.touched)
+            ">
+                <span *ngIf="validateField.estado?.hasError('required')">
+                    Campo requerido.
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" id="fechaDeInicioId">
+            <mat-label>Fecha</mat-label>
+            <input matInput [matDatepicker]="pickerFechaUltimaAct" placeholder="click en icono de fecha ==>"
+                (dateChange)="addEventDatePicker($event, 'fechaUltimaAct')" readonly formControlName="fechaUltimaAct" />
+            <mat-datepicker-toggle matSuffix [for]="pickerFechaUltimaAct"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFechaUltimaAct disabled="false"></mat-datepicker>
+            <mat-error *ngIf="
+                validateField.fechaUltimaAct?.invalid &&
+                (validateField.fechaUltimaAct?.dirty ||
+                  validateField.fechaUltimaAct?.touched)
+              ">
+                <span *ngIf="validateField.fechaUltimaAct?.hasError('required')">
+                    Campo requerido.
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>ID del Cliente</mat-label>
+            <input matInput type="number" placeholder="Id del Cliente" formControlName="idCliente" />
+            <mat-error *ngIf="
+            validateField.idCliente?.invalid &&
+            (validateField.idCliente?.dirty || validateField.idCliente?.touched)
+            ">
+                <span *ngIf="validateField.idCliente?.hasError('required')">
+                    Campo requerido.
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Número de cuenta</mat-label>
+            <input matInput type="text" placeholder="Número de cuenta" formControlName="numeroCuenta" />
+            <mat-error *ngIf="
+            validateField.numeroCuenta?.invalid &&
+            (validateField.numeroCuenta?.dirty || validateField.numeroCuenta?.touched)
+            ">
+                <span *ngIf="validateField.numeroCuenta?.hasError('required')">
+                    Campo requerido.
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Saldo</mat-label>
+            <input matInput type="number" placeholder="Saldo" formControlName="saldo" />
+            <mat-error *ngIf="
+            validateField.saldo?.invalid &&
+            (validateField.saldo?.dirty || validateField.saldo?.touched)
+            ">
+                <span *ngIf="validateField.saldo?.hasError('required')">
+                    Campo requerido.
+                </span>
+            </mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-raised-button color="warn" (click)="closeDialog()">
+            CERRAR
+        </button>
+        <button mat-raised-button color="primary" type="submit">
+            GUARDAR
+        </button>
+    </mat-dialog-actions>
+</form>

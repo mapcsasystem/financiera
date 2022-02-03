@@ -6,8 +6,21 @@ const routes: Routes = [
   {
     path: '', component: AdminComponent,
     children: [
-      { path: '', loadChildren: () => import('./pages/customers/customers.module').then((m) => m.CustomersModule), },
-      { path: 'customers', loadChildren: () => import('./pages/customers/customers.module').then((m) => m.CustomersModule), }
+      {
+        path: '',
+        loadChildren: () =>
+          import('./pages/customers/customers.module').then((m) => m.CustomersModule)
+      },
+      {
+        path: 'customers',
+        loadChildren: () =>
+          import('./pages/customers/customers.module').then((m) => m.CustomersModule)
+      },
+      {
+        path: 'saving-accounts',
+        loadChildren: () =>
+          import('./pages/saving-accounts/saving-accounts.module').then((m) => m.SavingAccountsModule)
+      },
     ]
   }
 ];
