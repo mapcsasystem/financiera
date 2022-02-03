@@ -6,136 +6,52 @@
         </button>
     </mat-card-actions>
     <mat-card-content>
-         <div class="table-container mat-elevation-z8">
+        <div class="table-container mat-elevation-z8">
             <table mat-table [dataSource]="customersDataSource" matSort style="width: 100%">
                 <ng-container matColumnDef="id" [sticky]="false">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         id
                     </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center">
+                    <td mat-cell *matCellDef="let element">
                         {{ element.id }}
                     </td>
                 </ng-container>
-<!--
-                <ng-container matColumnDef="fechaDefuncion" [sticky]="false">
+                <ng-container matColumnDef="fullName" [sticky]="false">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        FECHA DE DEFUNCION
+                        Nombre Completo
                     </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center">
-                        {{ element.fechaDefuncion.seconds*1000 | date :"fullDate" }}
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.fullName }}
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="horaDefuncion" [sticky]="false">
+                <ng-container matColumnDef="address" [sticky]="false">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        HORA DE DEFUNCION
+                        Dirección
                     </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center">
-                        {{ element.horaDefuncion | timeFormat }}
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.address }}
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="nombreDifunto" [sticky]="false">
+                <ng-container matColumnDef="age" [sticky]="false">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        NOMBRE DEL DIFUNTO
+                        Edad
                     </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center">
-                        {{ element.nombreDifunto }}
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.age }}
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="domicilioDelServicio" [sticky]="false">
+                <ng-container matColumnDef="gender" [stickyEnd]="true">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        DOMICILIO DEL SERVICIO
+                        Género
                     </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center">
-                        {{ element.domicilioDelServicio }}
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.gender }}
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="responsableDelDifunto" [sticky]="false">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        RESPONSABLE DEL DIFUNTO
-                    </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center">
-                        {{ element.responsableDelDifunto }}
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="domicilioDelResponsable" [sticky]="false">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        DOMICILIO DEL RESPONSABLE
-                    </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center">
-                        {{ element.domicilioDelResponsable }}
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="precio" [sticky]="false">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>PRECIO</th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center">
-                        {{ element.precio | moneyPipe }}
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="fechaDelContrato" [sticky]="false">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        FECHA DEL CONTRATO
-                    </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center">
-                        {{ element.fechaDelContrato.seconds*1000 | date :"fullDate" }}
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="fechaDeProrroga" [sticky]="false">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        FECHA DE PRORROGA
-                    </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center">
-                        {{ element.fechaDeProrroga.seconds*1000 | date :"fullDate" }}
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="abono" [sticky]="false">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>ABONO</th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center">
-                        {{ element.abono | moneyPipe }}
-                    </td>
-                </ng-container>
-                <ng-container matColumnDef="observaciones" [sticky]="false">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        OBSERVACIONES
-                    </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center">
-                        {{ element.observaciones }}
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="actions" [stickyEnd]="true">
-                    <th mat-header-cell *matHeaderCellDef style="
-                    padding-left: 10px;
-                    border-left: 1px solid black;
-                    border-bottom: 1px solid black;
-                  ">
-                        ACCIONES
-                    </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center;">
-                        <ion-button [matMenuTriggerFor]="menuServiciosActions" fill="clear">
-                            <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
-                        </ion-button>
-                        <mat-menu #menuServiciosActions="matMenu">
-                            <button mat-menu-item>
-                                <mat-icon>mode_edit</mat-icon>
-                                <span>Editar</span>
-                            </button>
-                            <button mat-menu-item>
-                                <mat-icon>preview</mat-icon>
-                                <span>Ver detalle</span>
-                            </button>
-                        </mat-menu>
-                    </td>
-                </ng-container>
--->
                 <tr mat-header-row *matHeaderRowDef="customersDisplayedColumns; sticky: true"></tr>
 
                 <tr mat-row *matRowDef="let row; columns: customersDisplayedColumns"></tr>
