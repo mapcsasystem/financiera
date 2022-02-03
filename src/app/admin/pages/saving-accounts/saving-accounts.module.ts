@@ -10,6 +10,7 @@ import { CreateSavingAccountsComponent } from './dialogs/create-saving-accounts/
 import { TransactionDepositComponent } from './dialogs/transaction-deposit/transaction-deposit.component';
 import { TransactionRetirementComponent } from './dialogs/transaction-retirement/transaction-retirement.component';
 import { TransactionHistoryComponent } from './dialogs/transaction-history/transaction-history.component';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { TransactionHistoryComponent } from './dialogs/transaction-history/trans
     SavingAccountsRoutingModule,
     ReactiveFormsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    PipesModule
   ]
 })
 export class SavingAccountsModule { }

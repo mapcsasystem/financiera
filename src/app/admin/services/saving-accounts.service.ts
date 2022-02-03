@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CustomersModel } from '../models/customers.model';
-import { SavingAccountsResponseModel } from '../models/saving-accounts';
+import { SavingAccountsResponseModel } from '../models/saving-accounts.model';
 import { CustomersModule } from '../pages/customers/customers.module';
 
 @Injectable({
