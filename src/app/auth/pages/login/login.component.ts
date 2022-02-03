@@ -19,10 +19,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   private _subscription = new Subscription();
 
   constructor(
-    private _fb: FormBuilder,
-    private _router: Router,
-    private _loginService: LoginService,
-    private _snackBar: MatSnackBar
+    private fb: FormBuilder,
+    private router: Router,
+    private loginService: LoginService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   initFormLogin() {
-    this.formLogin = this._fb.group({
+    this.formLogin = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(RegExpValidation.email)]],
       password: ['', [Validators.required]],
     })
@@ -42,12 +42,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.formLogin.markAllAsTouched();
       return;
     }
-    this._loginService.login(this.formLogin.value)
+    this.loginService.login(this.formLogin.value)
       .subscribe(resp => {
         if (resp) {
           // this.router.navigate(['/admin'])
         } else {
-          this._snackBar.open('Error no tienes permisos', 'OK', {
+          this.snackBar.open('Error no tienes permisos', 'OK', {
             duration: 5000,
           });
         }
