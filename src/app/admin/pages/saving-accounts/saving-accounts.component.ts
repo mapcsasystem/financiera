@@ -3,7 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ErrorExpiredComponent } from '../../components/error-expired/error-expired.component';
 import { SavingAccountsModel } from '../../models/saving-accounts.model';
 import { SavingAccountsService } from '../../services/saving-accounts.service';
 import { CreateSavingAccountsComponent } from './dialogs/create-saving-accounts/create-saving-accounts.component';
@@ -34,13 +36,16 @@ export class SavingAccountsComponent implements OnInit, OnDestroy, AfterViewInit
   private subscription = new Subscription();
   constructor(
     private dialog: MatDialog,
-    private savingAccountsService: SavingAccountsService
+    private savingAccountsService: SavingAccountsService,
+    private router: Router
   ) { }
   ngOnInit(): void {
-    this.getAllCustomers();
+    this.getAllSavingAccounts();
   }
 
-  getAllCustomers() {
+  getAllSavingAccounts() {
+    this.savingAccountsDataSource.data = [];
+    this.savingAccounts = [];
     this.savingAccountsService.getAllSavingAccounts().subscribe((resp) => {
       const auxRes = { ...resp };
       if (resp) {
@@ -50,11 +55,24 @@ export class SavingAccountsComponent implements OnInit, OnDestroy, AfterViewInit
         }
         this.savingAccountsDataSource.data = [...this.savingAccounts];
         this.savingAccounts = [...this.savingAccounts]
-      } else {
-        this.savingAccountsDataSource.data = [];
-        this.savingAccounts = [];
       }
       this.savingAccountsDataSource.sort = this.sort;
+    }, ({ error }) => {
+      if ('Auth token is expired' === error.error) {
+        const dialogRef = this.dialog.open(ErrorExpiredComponent, {
+          maxWidth: '100vw',
+          maxHeight: '100vh',
+          // height: '95%',
+          width: '80%',
+        });
+
+        this.subscription.add(
+          dialogRef.afterClosed().subscribe(
+            (result) => {
+              this.router.navigate(['/login']);
+            })
+        );
+      }
     })
   }
 
@@ -80,7 +98,7 @@ export class SavingAccountsComponent implements OnInit, OnDestroy, AfterViewInit
       maxWidth: '100vw',
       maxHeight: '100vh',
       // height: '95%',
-      width: '50%',
+      width: '80%',
     });
 
     this.subscription.add(
@@ -124,7 +142,7 @@ export class SavingAccountsComponent implements OnInit, OnDestroy, AfterViewInit
           })
         );
         break;
-        case 'history':
+      case 'history':
         dialogRef = this.dialog.open(TransactionHistoryComponent, {
           maxWidth: '100vw',
           maxHeight: '100vh',

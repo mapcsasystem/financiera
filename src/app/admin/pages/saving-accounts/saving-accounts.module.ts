@@ -11,6 +11,7 @@ import { TransactionDepositComponent } from './dialogs/transaction-deposit/trans
 import { TransactionRetirementComponent } from './dialogs/transaction-retirement/transaction-retirement.component';
 import { TransactionHistoryComponent } from './dialogs/transaction-history/transaction-history.component';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
+import { ComponentsModule } from '../../components/components.module';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { PipesModule } from 'src/app/shared/pipes/pipes.module';
     ReactiveFormsModule,
     MaterialModule,
     HttpClientModule,
-    PipesModule
+    PipesModule,
+    ComponentsModule
   ]
 })
 export class SavingAccountsModule { }

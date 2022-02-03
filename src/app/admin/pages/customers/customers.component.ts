@@ -38,11 +38,10 @@ export class CustomersComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getAllCustomers() {
+    this.customersDataSource.data = [];
+    this.customers = [];
     this.customersService.getAllCustomers().subscribe(resp => {
-      if (resp.length === 0) {
-        this.customersDataSource.data = [];
-        this.customers = [];
-      } else {
+      if (resp.length !== 0) {
         this.customersDataSource.data = resp;
         this.customers = resp;
       }

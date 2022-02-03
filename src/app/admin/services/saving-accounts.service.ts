@@ -13,14 +13,17 @@ export class SavingAccountsService {
 
     constructor(private http: HttpClient) { }
 
-    getAllSavingAccounts():Observable<SavingAccountsResponseModel> {
+    getAllSavingAccounts(): Observable<SavingAccountsResponseModel> {
         const params = {
             auth: environment.api.savingAccounts.auth
         }
         return this.http.get<SavingAccountsResponseModel>(`${environment.api.savingAccounts.url}`, { params });
     }
 
-    //   createCustomer(form: CustomersModule) {
-    //     return this.http.post(`${environment.api.customers}`, form )
-    //   }
+    createSavingAccounts(form: CustomersModule) {
+        const params = {
+            auth: environment.api.savingAccounts.auth
+        }
+        return this.http.post(`${environment.api.savingAccounts.url}`, form, { params })
+    }
 }

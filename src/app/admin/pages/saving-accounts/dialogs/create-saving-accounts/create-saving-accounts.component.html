@@ -10,55 +10,68 @@
     </div>
 </h2>
 <form [formGroup]="formData" (ngSubmit)="save()" autocomplete="off">
-    <!--
     <mat-dialog-content class="mat-typography">
         <mat-form-field appearance="outline">
-            <mat-label>Nombre Completo</mat-label>
-            <input matInput type="text" placeholder="Nombre Completo" formControlName="fullName" />
+            <mat-label>Estado</mat-label>
+            <input matInput type="text" readonly placeholder="Nombre Completo" formControlName="estado" />
             <mat-error *ngIf="
-                  validateField.fullName?.invalid &&
-                  (validateField.fullName?.dirty || validateField.fullName?.touched)
-                ">
-                <span *ngIf="validateField.fullName?.hasError('required')">
+            validateField.estado?.invalid &&
+            (validateField.estado?.dirty || validateField.estado?.touched)
+            ">
+                <span *ngIf="validateField.estado?.hasError('required')">
+                    Campo requerido.
+                </span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" id="fechaDeInicioId">
+            <mat-label>Fecha</mat-label>
+            <input matInput [matDatepicker]="pickerFechaUltimaAct" placeholder="click en icono de fecha ==>"
+                (dateChange)="addEventDatePicker($event, 'fechaUltimaAct')" readonly formControlName="fechaUltimaAct" />
+            <mat-datepicker-toggle matSuffix [for]="pickerFechaUltimaAct"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFechaUltimaAct disabled="false"></mat-datepicker>
+            <mat-error *ngIf="
+                validateField.fechaUltimaAct?.invalid &&
+                (validateField.fechaUltimaAct?.dirty ||
+                  validateField.fechaUltimaAct?.touched)
+              ">
+                <span *ngIf="validateField.fechaUltimaAct?.hasError('required')">
+                    Campo requerido.
+                </span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>ID del Cliente</mat-label>
+            <input matInput type="number" placeholder="Id del Cliente" formControlName="idCliente" />
+            <mat-error *ngIf="
+            validateField.idCliente?.invalid &&
+            (validateField.idCliente?.dirty || validateField.idCliente?.touched)
+            ">
+                <span *ngIf="validateField.idCliente?.hasError('required')">
                     Campo requerido.
                 </span>
             </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-            <mat-label>Dirección</mat-label>
-            <input matInput type="text" placeholder="Dirección" formControlName="address" />
+            <mat-label>Número de cuenta</mat-label>
+            <input matInput type="text" placeholder="Número de cuenta" formControlName="numeroCuenta" />
             <mat-error *ngIf="
-                  validateField.address?.invalid &&
-                  (validateField.address?.dirty || validateField.address?.touched)
-                ">
-                <span *ngIf="validateField.address?.hasError('required')">
+            validateField.numeroCuenta?.invalid &&
+            (validateField.numeroCuenta?.dirty || validateField.numeroCuenta?.touched)
+            ">
+                <span *ngIf="validateField.numeroCuenta?.hasError('required')">
                     Campo requerido.
                 </span>
             </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-            <mat-label>Edad</mat-label>
-            <input matInput type="number" placeholder="Edad" formControlName="age" />
+            <mat-label>Saldo</mat-label>
+            <input matInput type="number" placeholder="Saldo" formControlName="saldo" />
             <mat-error *ngIf="
-                  validateField.age?.invalid &&
-                  (validateField.age?.dirty || validateField.age?.touched)
-                ">
-                <span *ngIf="validateField.age?.hasError('required')">
-                    Campo requerido.
-                </span>
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Género</mat-label>
-            <mat-select formControlName="gender">
-                <mat-option value="Masculino">Masculino</mat-option>
-                <mat-option value="Femenino">Femenino</mat-option>
-            </mat-select>
-            <mat-error *ngIf="
-                  validateField.gender?.invalid &&
-                  (validateField.gender?.dirty || validateField.gender?.touched)
-                ">
-                <span *ngIf="validateField.gender?.hasError('required')">
+            validateField.saldo?.invalid &&
+            (validateField.saldo?.dirty || validateField.saldo?.touched)
+            ">
+                <span *ngIf="validateField.saldo?.hasError('required')">
                     Campo requerido.
                 </span>
             </mat-error>
@@ -72,5 +85,4 @@
             GUARDAR
         </button>
     </mat-dialog-actions>
--->
 </form>
