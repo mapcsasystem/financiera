@@ -21,7 +21,7 @@
         matInput
         type="text"
         readonly
-        placeholder="Nombre Completo"
+        placeholder="Estado"
         formControlName="estado"
       />
       <mat-error
@@ -109,7 +109,9 @@
         type="number"
         placeholder="Saldo"
         formControlName="saldo"
+        onkeypress="return event.charCode != 45"
       />
+      <mat-icon matPrefix>attach_money</mat-icon>
       <mat-error
         *ngIf="
           validateField.saldo?.invalid &&
@@ -118,6 +120,9 @@
       >
         <span *ngIf="validateField.saldo?.hasError('required')">
           Campo requerido.
+        </span>
+        <span *ngIf="validateField.saldo?.hasError('pattern')">
+          Solo números "+" 2 decimales como máximo.
         </span>
       </mat-error>
     </mat-form-field>
