@@ -70,37 +70,14 @@
             </th>
             <td mat-cell *matCellDef="let element">
               <button
-                mat-icon-button
-                [matMenuTriggerFor]="menuTransactionsActions"
-                aria-label="Example icon button with a vertical three dot icon"
+                mat-stroked-button
+                color="primary"
+                (click)="openDialogGeneric('deposit', element)"
               >
-                <mat-icon>more_vert</mat-icon>
+                <span style="color: #673ab7">DEPOSITO</span>
+                <span>/</span>
+                <span style="color: #f44336">RETIRO</span>
               </button>
-              <mat-menu #menuTransactionsActions="matMenu">
-                <button
-                  mat-menu-item
-                  color="primary"
-                  (click)="openDialogGeneric('deposit', element)"
-                >
-                  <mat-icon color="primary">north</mat-icon>
-                  <span style="color: #673ab7">Deposito</span>
-                </button>
-                <button
-                  mat-menu-item
-                  color="warn"
-                  (click)="openDialogGeneric('retirement', element)"
-                >
-                  <mat-icon color="warn">south</mat-icon>
-                  <span style="color: #f44336">Retiro</span>
-                </button>
-                <button
-                  mat-menu-item
-                  (click)="openDialogGeneric('history', element)"
-                >
-                  <mat-icon>history</mat-icon>
-                  <span>Historial de transacciónes</span>
-                </button>
-              </mat-menu>
             </td>
           </ng-container>
 

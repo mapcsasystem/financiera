@@ -17,7 +17,6 @@ import { SavingAccountsService } from '../../services/saving-accounts.service';
 import { CreateSavingAccountsComponent } from './dialogs/create-saving-accounts/create-saving-accounts.component';
 import { TransactionDepositComponent } from './dialogs/transaction-deposit/transaction-deposit.component';
 import { TransactionHistoryComponent } from './dialogs/transaction-history/transaction-history.component';
-import { TransactionRetirementComponent } from './dialogs/transaction-retirement/transaction-retirement.component';
 
 @Component({
   selector: 'app-saving-accounts',
@@ -141,21 +140,10 @@ export class SavingAccountsComponent
         });
         this.subscription.add(
           dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result: ${result}`);
-          })
-        );
-        break;
-      case 'retirement':
-        dialogRef = this.dialog.open(TransactionRetirementComponent, {
-          maxWidth: '100vw',
-          maxHeight: '100vh',
-          // height: '95%',
-          width: '95%',
-          data: savingAccounts,
-        });
-        this.subscription.add(
-          dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result: ${result}`);
+            if (result) {
+              this.ngOnInit();
+              this.ngAfterViewInit();
+            }
           })
         );
         break;

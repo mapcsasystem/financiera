@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import { ErrorExpiredComponent } from 'src/app/admin/components/error-expired/error-expired.component';
 import { SavingAccountsService } from 'src/app/admin/services/saving-accounts.service';
 import { SavingAccountsGettersFields } from 'src/app/shared/getters/saving-accounts-getters';
+import { RegExpValidation } from 'src/app/shared/regex/regex';
 
 @Component({
   selector: 'app-create-saving-accounts',
@@ -43,7 +44,7 @@ export class CreateSavingAccountsComponent implements OnInit, OnDestroy {
       fechaUltimaAct: [null, [Validators.required]],
       idCliente: [null, [Validators.required]],
       numeroCuenta: [null, [Validators.required]],
-      saldo: [null, [Validators.required]],
+      saldo: [null, [Validators.required,  Validators.pattern(RegExpValidation.onlyNumbersFloats)]],
     });
     this.validateField = new SavingAccountsGettersFields(this.formData);
   }
@@ -102,6 +103,6 @@ export class CreateSavingAccountsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+   this.subscription.unsubscribe()
   }
 }
