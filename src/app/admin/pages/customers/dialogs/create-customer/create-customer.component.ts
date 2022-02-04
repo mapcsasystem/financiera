@@ -7,7 +7,7 @@ import { GettersCustomersFields } from 'src/app/shared/getters/customers-getters
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
-  styleUrls: ['./create-customer.component.scss']
+  styleUrls: ['./create-customer.component.scss'],
 })
 export class CreateCustomerComponent implements OnInit {
   formData!: FormGroup;
@@ -17,7 +17,7 @@ export class CreateCustomerComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private customersService: CustomersService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -31,7 +31,7 @@ export class CreateCustomerComponent implements OnInit {
       address: [null, [Validators.required]],
       age: [null, [Validators.required]],
       gender: [null, [Validators.required]],
-    })
+    });
     this.validateField = new GettersCustomersFields(this.formData);
   }
 
@@ -44,10 +44,10 @@ export class CreateCustomerComponent implements OnInit {
       this.formData.markAllAsTouched();
       return;
     }
-    this.customersService.createCustomer(this.formData.value)
-      .subscribe(resp => {
+    this.customersService
+      .createCustomer(this.formData.value)
+      .subscribe((resp) => {
         this.dialogRef.close(true);
-      })
+      });
   }
-
 }

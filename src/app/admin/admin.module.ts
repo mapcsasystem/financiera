@@ -12,14 +12,8 @@ import { MatListModule } from '@angular/material/list';
 import { MaterialModule } from '../shared/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 
-
 @NgModule({
   declarations: [AdminComponent],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    MaterialModule,
-    HttpClientModule
-  ]
+  imports: [CommonModule, AdminRoutingModule, MaterialModule, HttpClientModule],
 })
-export class AdminModule { }
+export class AdminModule {}

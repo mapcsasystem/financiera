@@ -7,17 +7,21 @@ import { LoginService } from '../auth/services/login.service';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent {
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches),
+      map((result) => result.matches),
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private loginService: LoginService) { }
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private loginService: LoginService
+  ) {}
+
   logout() {
     this.loginService.logout();
   }

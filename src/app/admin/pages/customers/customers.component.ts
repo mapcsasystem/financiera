@@ -1,9 +1,16 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { LoginService } from 'src/app/auth/services/login.service';
 import { CustomersModel } from '../../models/customers.model';
 import { CustomersService } from '../../services/customers.service';
 import { CreateCustomerComponent } from './dialogs/create-customer/create-customer.component';
@@ -11,7 +18,7 @@ import { CreateCustomerComponent } from './dialogs/create-customer/create-custom
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.scss']
+  styleUrls: ['./customers.component.scss'],
 })
 export class CustomersComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -22,7 +29,7 @@ export class CustomersComponent implements OnInit, OnDestroy, AfterViewInit {
     'fullName',
     'address',
     'age',
-    'gender'
+    'gender',
   ];
 
   customersDataSource = new MatTableDataSource<CustomersModel>();
@@ -30,8 +37,9 @@ export class CustomersComponent implements OnInit, OnDestroy, AfterViewInit {
   private subscription = new Subscription();
   constructor(
     private dialog: MatDialog,
-    private customersService: CustomersService
-  ) { }
+    private customersService: CustomersService,
+    private loginService: LoginService
+  ) {}
 
   ngOnInit(): void {
     this.getAllCustomers();
@@ -40,13 +48,13 @@ export class CustomersComponent implements OnInit, OnDestroy, AfterViewInit {
   getAllCustomers() {
     this.customersDataSource.data = [];
     this.customers = [];
-    this.customersService.getAllCustomers().subscribe(resp => {
+    this.customersService.getAllCustomers().subscribe((resp) => {
       if (resp.length !== 0) {
         this.customersDataSource.data = resp;
         this.customers = resp;
       }
       this.customersDataSource.sort = this.sort;
-    })
+    });
   }
 
   async ngAfterViewInit() {
@@ -62,7 +70,6 @@ export class CustomersComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   openDialog(): void {
-
     const dialogRef = this.dialog.open(CreateCustomerComponent, {
       maxWidth: '100vw',
       maxHeight: '100vh',
