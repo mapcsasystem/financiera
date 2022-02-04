@@ -13,14 +13,13 @@ import { TransactionHistoryComponent } from './dialogs/transaction-history/trans
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { ComponentsModule } from '../../components/components.module';
 
-
 @NgModule({
   declarations: [
     SavingAccountsComponent,
     CreateSavingAccountsComponent,
     TransactionDepositComponent,
     TransactionRetirementComponent,
-    TransactionHistoryComponent
+    TransactionHistoryComponent,
   ],
   imports: [
     CommonModule,
@@ -29,7 +28,7 @@ import { ComponentsModule } from '../../components/components.module';
     MaterialModule,
     HttpClientModule,
     PipesModule,
-    ComponentsModule
-  ]
+    ComponentsModule,
+  ],
 })
-export class SavingAccountsModule { }
+export class SavingAccountsModule {}

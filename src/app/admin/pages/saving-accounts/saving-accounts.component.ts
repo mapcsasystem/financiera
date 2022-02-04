@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -16,9 +22,11 @@ import { TransactionRetirementComponent } from './dialogs/transaction-retirement
 @Component({
   selector: 'app-saving-accounts',
   templateUrl: './saving-accounts.component.html',
-  styleUrls: ['./saving-accounts.component.scss']
+  styleUrls: ['./saving-accounts.component.scss'],
 })
-export class SavingAccountsComponent implements OnInit, OnDestroy, AfterViewInit {
+export class SavingAccountsComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -28,17 +36,18 @@ export class SavingAccountsComponent implements OnInit, OnDestroy, AfterViewInit
     'fechaUltimaAct',
     'numeroCuenta',
     'saldo',
-    'transacciones'
+    'transacciones',
   ];
 
   savingAccountsDataSource = new MatTableDataSource<SavingAccountsModel>();
   savingAccounts: SavingAccountsModel[] = [];
   private subscription = new Subscription();
+
   constructor(
     private dialog: MatDialog,
     private savingAccountsService: SavingAccountsService,
     private router: Router
-  ) { }
+  ) {}
   ngOnInit(): void {
     this.getAllSavingAccounts();
   }
@@ -46,45 +55,50 @@ export class SavingAccountsComponent implements OnInit, OnDestroy, AfterViewInit
   getAllSavingAccounts() {
     this.savingAccountsDataSource.data = [];
     this.savingAccounts = [];
-    this.savingAccountsService.getAllSavingAccounts().subscribe((resp) => {
-      const auxRes = { ...resp };
-      if (resp) {
-        for (let iterator of Object.keys(auxRes)) {
-          auxRes[iterator].id = iterator;
-          this.savingAccounts.push(auxRes[iterator]);
+    this.savingAccountsService.getAllSavingAccounts().subscribe(
+      (resp) => {
+        const auxRes = { ...resp };
+        if (resp) {
+          for (let iterator of Object.keys(auxRes)) {
+            auxRes[iterator].id = iterator;
+            this.savingAccounts.push(auxRes[iterator]);
+          }
+          this.savingAccountsDataSource.data = [...this.savingAccounts];
+          this.savingAccounts = [...this.savingAccounts];
         }
-        this.savingAccountsDataSource.data = [...this.savingAccounts];
-        this.savingAccounts = [...this.savingAccounts]
-      }
-      this.savingAccountsDataSource.sort = this.sort;
-    }, ({ error }) => {
-      if ('Auth token is expired' === error.error) {
-        const dialogRef = this.dialog.open(ErrorExpiredComponent, {
-          maxWidth: '100vw',
-          maxHeight: '100vh',
-          // height: '95%',
-          width: '80%',
-        });
+        this.savingAccountsDataSource.sort = this.sort;
+      },
+      ({ error }) => {
+        if ('Auth token is expired' === error.error) {
+          const dialogRef = this.dialog.open(ErrorExpiredComponent, {
+            maxWidth: '100vw',
+            maxHeight: '100vh',
+            // height: '95%',
+            width: '80%',
+          });
 
-        this.subscription.add(
-          dialogRef.afterClosed().subscribe(
-            (result) => {
+          this.subscription.add(
+            dialogRef.afterClosed().subscribe((result) => {
               this.router.navigate(['/login']);
             })
-        );
+          );
+        }
       }
-    })
+    );
   }
 
   async ngAfterViewInit() {
     this.savingAccountsDataSource.paginator = this.paginator;
     this.savingAccountsDataSource.paginator._intl.itemsPerPageLabel =
       'Cuentas de Ahorro por página';
-    this.savingAccountsDataSource.paginator._intl.firstPageLabel = 'Primera Página';
+    this.savingAccountsDataSource.paginator._intl.firstPageLabel =
+      'Primera Página';
     this.savingAccountsDataSource.paginator._intl.previousPageLabel =
       'Página anterior';
-    this.savingAccountsDataSource.paginator._intl.nextPageLabel = 'Siguente página';
-    this.savingAccountsDataSource.paginator._intl.lastPageLabel = 'Última Página';
+    this.savingAccountsDataSource.paginator._intl.nextPageLabel =
+      'Siguente página';
+    this.savingAccountsDataSource.paginator._intl.lastPageLabel =
+      'Última Página';
     this.savingAccountsDataSource.sort = this.sort;
   }
 
@@ -111,7 +125,10 @@ export class SavingAccountsComponent implements OnInit, OnDestroy, AfterViewInit
     );
   }
 
-  openDialogGeneric(dialogOpen: string, savingAccounts: SavingAccountsModel): void {
+  openDialogGeneric(
+    dialogOpen: string,
+    savingAccounts: SavingAccountsModel
+  ): void {
     let dialogRef;
     switch (dialogOpen) {
       case 'deposit':

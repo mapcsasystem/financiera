@@ -1,7 +1,11 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ErrorExpiredComponent } from 'src/app/admin/components/error-expired/error-expired.component';
@@ -11,13 +15,14 @@ import { SavingAccountsGettersFields } from 'src/app/shared/getters/saving-accou
 @Component({
   selector: 'app-create-saving-accounts',
   templateUrl: './create-saving-accounts.component.html',
-  styleUrls: ['./create-saving-accounts.component.scss']
+  styleUrls: ['./create-saving-accounts.component.scss'],
 })
-export class CreateSavingAccountsComponent implements OnInit,OnDestroy {
+export class CreateSavingAccountsComponent implements OnInit, OnDestroy {
   formData!: FormGroup;
   validateField!: SavingAccountsGettersFields;
   startDate!: Date;
   private subscription = new Subscription();
+
   constructor(
     private dialogRef: MatDialogRef<CreateSavingAccountsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -25,8 +30,7 @@ export class CreateSavingAccountsComponent implements OnInit,OnDestroy {
     private savingAccountsService: SavingAccountsService,
     private dialog: MatDialog,
     private router: Router
-  ) { }
-  
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -40,7 +44,7 @@ export class CreateSavingAccountsComponent implements OnInit,OnDestroy {
       idCliente: [null, [Validators.required]],
       numeroCuenta: [null, [Validators.required]],
       saldo: [null, [Validators.required]],
-    })
+    });
     this.validateField = new SavingAccountsGettersFields(this.formData);
   }
 
@@ -53,33 +57,30 @@ export class CreateSavingAccountsComponent implements OnInit,OnDestroy {
       this.formData.markAllAsTouched();
       return;
     }
-    this.savingAccountsService.createSavingAccounts(this.formData.value)
-      .subscribe(resp => {
-        this.dialogRef.close(true);
-      }, ({ error }) => {
-        if ('Auth token is expired' === error.error) {
+    this.savingAccountsService
+      .createSavingAccounts(this.formData.value)
+      .subscribe(
+        (resp) => {
           this.dialogRef.close(true);
-          const dialogRef = this.dialog.open(ErrorExpiredComponent, {
-            maxWidth: '100vw',
-            maxHeight: '100vh',
-            // height: '95%',
-            width: '80%',
-          });
-  
-          this.subscription.add(
-            dialogRef.afterClosed().subscribe(
-              (result) => {
+        },
+        ({ error }) => {
+          if ('Auth token is expired' === error.error) {
+            this.dialogRef.close(true);
+            const dialogRef = this.dialog.open(ErrorExpiredComponent, {
+              maxWidth: '100vw',
+              maxHeight: '100vh',
+              // height: '95%',
+              width: '80%',
+            });
+
+            this.subscription.add(
+              dialogRef.afterClosed().subscribe((result) => {
                 this.router.navigate(['/login']);
               })
-          );
+            );
+          }
         }
-      }
-      
-      
-      
-      
-      
-      )
+      );
   }
 
   addEventDatePicker(

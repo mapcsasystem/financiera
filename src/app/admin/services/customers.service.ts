@@ -6,17 +6,16 @@ import { CustomersModel } from '../models/customers.model';
 import { CustomersModule } from '../pages/customers/customers.module';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CustomersService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllCustomers(): Observable<CustomersModel[]> {
     return this.http.get<CustomersModel[]>(`${environment.api.customers}`);
   }
 
   createCustomer(form: CustomersModule) {
-    return this.http.post(`${environment.api.customers}`, form )
+    return this.http.post(`${environment.api.customers}`, form);
   }
 }

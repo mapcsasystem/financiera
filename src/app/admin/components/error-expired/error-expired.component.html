@@ -1,23 +1,21 @@
 <h2 mat-dialog-title class="title">
-    <div class="title--icon">
-        <mat-icon class="title--icon__margin-icon" color="warn">info</mat-icon>
-        <span style="color: #f44336;">
-            UPSSS!!!
-        </span>
-    </div>
-    <div>
-        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" 
-        (click)="closeDialog()"
-        >
-            <mat-icon>close</mat-icon>
-        </button>
-    </div>
+  <div class="title--icon">
+    <mat-icon class="title--icon__margin-icon" color="warn">info</mat-icon>
+    <span style="color: #f44336"> UPSSS!!! </span>
+  </div>
+  <div>
+    <button
+      mat-icon-button
+      aria-label="Example icon button with a vertical three dot icon"
+      (click)="closeDialog()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
 </h2>
-    <mat-dialog-content class="mat-typography">
-       <p>Tu sesión a caducado favor de iniciar sesión nuevamente!!!</p>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-        <button mat-raised-button color="warn" (click)="closeDialog()">
-            CERRAR
-        </button>
-    </mat-dialog-actions>
+<mat-dialog-content class="mat-typography">
+  <p>Tu sesión a caducado favor de iniciar sesión nuevamente!!!</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="warn" (click)="closeDialog()">CERRAR</button>
+</mat-dialog-actions>

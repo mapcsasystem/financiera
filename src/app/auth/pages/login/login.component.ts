@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginService.login(this.formLogin.value)
       .subscribe(resp => {
         if (resp) {
-          // this.router.navigate(['/admin'])
+          this.router.navigate(['/admin']);
         } else {
           this.snackBar.open('Error no tienes permisos', 'OK', {
             duration: 5000,

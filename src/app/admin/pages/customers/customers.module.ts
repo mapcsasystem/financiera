@@ -7,19 +7,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateCustomerComponent } from './dialogs/create-customer/create-customer.component';
-
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
-  declarations: [
-    CustomersComponent,
-    CreateCustomerComponent
-  ],
+  declarations: [CustomersComponent, CreateCustomerComponent],
   imports: [
     CommonModule,
     CustomersRoutingModule,
     ReactiveFormsModule,
     MaterialModule,
     HttpClientModule,
-  ]
+    ComponentsModule,
+  ],
 })
-export class CustomersModule { }
+export class CustomersModule {}

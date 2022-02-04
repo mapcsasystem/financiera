@@ -1,98 +1,129 @@
 <mat-card class="mat-elevation-z0">
-    <mat-card-title>ALTA CUENTA DE AHORRO</mat-card-title>
-    <mat-card-actions align="end">
-        <button mat-raised-button color="primary" (click)="openDialogCreate()">
-            AGREGAR CUENTA DE AHORRO
-        </button>
-    </mat-card-actions>
-    <mat-card-content>
-        <mat-form-field appearance="standard">
-            <mat-label>Buscar</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input>
-        </mat-form-field>
-        <div class=" mat-elevation-z8">
-            <div class="table-container mat-elevation-z0">
-                <table mat-table [dataSource]="savingAccountsDataSource" matSort style="width: 100%">
-                    <ng-container matColumnDef="idCliente" [sticky]="false">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                            ID del cliente
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{ element.idCliente }}
-                        </td>
-                    </ng-container>
-                    <ng-container matColumnDef="estado" [sticky]="false">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Estado de cuenta
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{ element.estado }}
-                        </td>
-                    </ng-container>
+  <mat-card-title>ALTA CUENTA DE AHORRO</mat-card-title>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" (click)="openDialogCreate()">
+      AGREGAR CUENTA DE AHORRO
+    </button>
+  </mat-card-actions>
+  <mat-card-content>
+    <mat-form-field appearance="standard">
+      <mat-label>Buscar</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Buscar"
+        #input
+      />
+    </mat-form-field>
+    <div class="mat-elevation-z8">
+      <div class="table-container mat-elevation-z0">
+        <table
+          mat-table
+          [dataSource]="savingAccountsDataSource"
+          matSort
+          style="width: 100%"
+        >
+          <ng-container matColumnDef="idCliente" [sticky]="false">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              ID del cliente
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.idCliente }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="estado" [sticky]="false">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Estado de cuenta
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.estado }}
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="fechaUltimaAct" [sticky]="false">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Fecha última actualización
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{ element.fechaUltimaAct | date }}
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="fechaUltimaAct" [sticky]="false">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Fecha última actualización
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.fechaUltimaAct | date }}
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="numeroCuenta" [sticky]="false">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Número de cuenta
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{ element.numeroCuenta }}
-                        </td>
-                    </ng-container>
-                    <ng-container matColumnDef="saldo" [sticky]="false">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Saldo
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{ element.saldo | moneyPipe}}
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="numeroCuenta" [sticky]="false">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Número de cuenta
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.numeroCuenta }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="saldo" [sticky]="false">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Saldo</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.saldo | moneyPipe }}
+            </td>
+          </ng-container>
 
-                    <ng-container matColumnDef="transacciones" [stickyEnd]="true">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Transacciónes
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <button mat-icon-button [matMenuTriggerFor]="menuTransactionsActions"
-                                aria-label="Example icon button with a vertical three dot icon">
-                                <mat-icon>more_vert</mat-icon>
-                            </button>
-                            <mat-menu #menuTransactionsActions="matMenu">
-                                <button mat-menu-item color="primary" (click)="openDialogGeneric('deposit',element)">
-                                    <mat-icon color="primary">north</mat-icon>
-                                    <span style="color: #673ab7;">Deposito</span>
-                                </button>
-                                <button mat-menu-item  color="warn" (click)="openDialogGeneric('retirement',element)">
-                                    <mat-icon color="warn">south</mat-icon>
-                                    <span style="color: #f44336;">Retiro</span>
-                                </button>
-                                <button mat-menu-item (click)="openDialogGeneric('history',element)">
-                                    <mat-icon>history</mat-icon>
-                                    <span >Historial de transacciónes</span>
-                                </button>
-                            </mat-menu>
-                        </td>
-                    </ng-container>
+          <ng-container matColumnDef="transacciones" [stickyEnd]="true">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Transacciónes
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                [matMenuTriggerFor]="menuTransactionsActions"
+                aria-label="Example icon button with a vertical three dot icon"
+              >
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menuTransactionsActions="matMenu">
+                <button
+                  mat-menu-item
+                  color="primary"
+                  (click)="openDialogGeneric('deposit', element)"
+                >
+                  <mat-icon color="primary">north</mat-icon>
+                  <span style="color: #673ab7">Deposito</span>
+                </button>
+                <button
+                  mat-menu-item
+                  color="warn"
+                  (click)="openDialogGeneric('retirement', element)"
+                >
+                  <mat-icon color="warn">south</mat-icon>
+                  <span style="color: #f44336">Retiro</span>
+                </button>
+                <button
+                  mat-menu-item
+                  (click)="openDialogGeneric('history', element)"
+                >
+                  <mat-icon>history</mat-icon>
+                  <span>Historial de transacciónes</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="savingAccountsDisplayedColumns; sticky: true"></tr>
+          <tr
+            mat-header-row
+            *matHeaderRowDef="savingAccountsDisplayedColumns; sticky: true"
+          ></tr>
 
-                    <tr mat-row *matRowDef="let row; columns: savingAccountsDisplayedColumns"></tr>
-                    <tr class="mat-row" *matNoDataRow>
-                        <td class="mat-cell" colspan="16">No se encontraron resultados.</td>
-                    </tr>
-                </table>
-            </div>
-            <mat-paginator [pageSizeOptions]="[100,200,500]" showFirstLastButtons
-                aria-label="Select page of periodic elements">
-            </mat-paginator>
-        </div>
-    </mat-card-content>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: savingAccountsDisplayedColumns"
+          ></tr>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="16">No se encontraron resultados.</td>
+          </tr>
+        </table>
+      </div>
+      <mat-paginator
+        [pageSizeOptions]="[100, 200, 500]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements"
+      >
+      </mat-paginator>
+    </div>
+  </mat-card-content>
 </mat-card>

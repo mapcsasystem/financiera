@@ -5,12 +5,12 @@ import { SavingAccountsComponent } from './saving-accounts.component';
 const routes: Routes = [
   {
     path: '',
-    component: SavingAccountsComponent
-  }
+    component: SavingAccountsComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class SavingAccountsRoutingModule { }
+export class SavingAccountsRoutingModule {}
