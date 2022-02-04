@@ -11,6 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { LoginService } from 'src/app/auth/services/login.service';
 import { ErrorExpiredComponent } from '../../components/error-expired/error-expired.component';
 import { SavingAccountsModel } from '../../models/saving-accounts.model';
 import { SavingAccountsService } from '../../services/saving-accounts.service';
@@ -45,7 +46,7 @@ export class SavingAccountsComponent
   constructor(
     private dialog: MatDialog,
     private savingAccountsService: SavingAccountsService,
-    private router: Router
+   private loginService:LoginService
   ) {}
   ngOnInit(): void {
     this.getAllSavingAccounts();
@@ -78,7 +79,7 @@ export class SavingAccountsComponent
 
           this.subscription.add(
             dialogRef.afterClosed().subscribe((result) => {
-              this.router.navigate(['/login']);
+              this.loginService.logout();
             })
           );
         }
