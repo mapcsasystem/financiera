@@ -15,15 +15,15 @@ export class SavingAccountsService {
 
     getAllSavingAccounts(): Observable<SavingAccountsResponseModel> {
         const params = {
-            auth: environment.api.savingAccounts.auth
+            auth: localStorage.getItem('idToken')!
         }
         return this.http.get<SavingAccountsResponseModel>(`${environment.api.savingAccounts.url}`, { params });
     }
 
     createSavingAccounts(form: CustomersModule) {
         const params = {
-            auth: environment.api.savingAccounts.auth
+            auth: localStorage.getItem('idToken')!
         }
-        return this.http.post(`${environment.api.savingAccounts.url}`, form, { params })
+        return this.http.post(`${environment.api.savingAccounts.url}/${localStorage.getItem('localId')!}.json`, form, { params })
     }
 }

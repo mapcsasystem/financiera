@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { LoginService } from '../auth/services/login.service';
 
 @Component({
   selector: 'app-admin',
@@ -16,6 +17,8 @@ export class AdminComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) { }
-
+  constructor(private breakpointObserver: BreakpointObserver, private loginService: LoginService) { }
+  logout() {
+    this.loginService.logout();
+  }
 }
