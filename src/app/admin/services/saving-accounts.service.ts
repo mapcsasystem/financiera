@@ -9,26 +9,39 @@ import { CustomersModule } from '../pages/customers/customers.module';
   providedIn: 'root',
 })
 export class SavingAccountsService {
+  private params = {
+    auth: localStorage.getItem('idToken')!,
+  };
   private idUser = localStorage.getItem('localId')!;
-  
   constructor(private http: HttpClient) {}
-  
+
   getAllSavingAccounts() {
-    const params = {
-      auth: localStorage.getItem('idToken')!,
-    };
     return this.http.get<SavingAccountsResponseModel>(
-      `${environment.api.savingAccounts.url}`,{params});
+      `${environment.api.savingAccounts.url}/${this.idUser}.json`,
+      { params: this.params }
+    );
   }
 
   createSavingAccounts(form: CustomersModule) {
-    const params = {
-      auth: localStorage.getItem('idToken')!,
-    };
     return this.http.post(
       `${environment.api.savingAccounts.url}/${this.idUser}.json`,
       form,
-      { params }
+      { params: this.params }
+    );
+  }
+
+  getAllTransacions() {
+    return this.http.get<SavingAccountsResponseModel>(
+      `${environment.api.transactions.url}/${this.idUser}.json`,
+      { params: this.params }
+    );
+  }
+
+  createTransactions(form: CustomersModule) {
+    return this.http.post(
+      `${environment.api.transactions.url}/${this.idUser}.json`,
+      form,
+      { params: this.params }
     );
   }
 }
