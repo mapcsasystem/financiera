@@ -11,13 +11,13 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { LoginService } from 'src/app/auth/services/login.service';
 import { ErrorExpiredComponent } from '../../components/error-expired/error-expired.component';
 import { SavingAccountsModel } from '../../models/saving-accounts.model';
 import { SavingAccountsService } from '../../services/saving-accounts.service';
 import { CreateSavingAccountsComponent } from './dialogs/create-saving-accounts/create-saving-accounts.component';
 import { TransactionDepositComponent } from './dialogs/transaction-deposit/transaction-deposit.component';
 import { TransactionHistoryComponent } from './dialogs/transaction-history/transaction-history.component';
-import { TransactionRetirementComponent } from './dialogs/transaction-retirement/transaction-retirement.component';
 
 @Component({
   selector: 'app-saving-accounts',
@@ -46,7 +46,7 @@ export class SavingAccountsComponent
   constructor(
     private dialog: MatDialog,
     private savingAccountsService: SavingAccountsService,
-    private router: Router
+   private loginService:LoginService
   ) {}
   ngOnInit(): void {
     this.getAllSavingAccounts();
@@ -79,7 +79,7 @@ export class SavingAccountsComponent
 
           this.subscription.add(
             dialogRef.afterClosed().subscribe((result) => {
-              this.router.navigate(['/login']);
+              this.loginService.logout();
             })
           );
         }
@@ -127,7 +127,7 @@ export class SavingAccountsComponent
 
   openDialogGeneric(
     dialogOpen: string,
-    savingAccounts: SavingAccountsModel
+    savingAccounts?: SavingAccountsModel
   ): void {
     let dialogRef;
     switch (dialogOpen) {
@@ -141,21 +141,10 @@ export class SavingAccountsComponent
         });
         this.subscription.add(
           dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result: ${result}`);
-          })
-        );
-        break;
-      case 'retirement':
-        dialogRef = this.dialog.open(TransactionRetirementComponent, {
-          maxWidth: '100vw',
-          maxHeight: '100vh',
-          // height: '95%',
-          width: '95%',
-          data: savingAccounts,
-        });
-        this.subscription.add(
-          dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result: ${result}`);
+            if (result) {
+              this.ngOnInit();
+              this.ngAfterViewInit();
+            }
           })
         );
         break;
@@ -165,11 +154,10 @@ export class SavingAccountsComponent
           maxHeight: '100vh',
           // height: '95%',
           width: '95%',
-          data: savingAccounts,
         });
         this.subscription.add(
           dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result: ${result}`);
+            // console.log(`Dialog result: ${result}`);
           })
         );
         break;

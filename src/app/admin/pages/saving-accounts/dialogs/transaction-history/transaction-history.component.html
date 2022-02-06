@@ -1,1 +1,103 @@
-<p>transaction-history works!</p>
+<h2 mat-dialog-title class="title">
+  <div class="title--icon">
+    <mat-icon class="title--icon__margin-icon">add_circle</mat-icon>
+    HISTORIAL DE TRANSACCIONES
+  </div>
+  <div>
+    <button
+      mat-icon-button
+      aria-label="Example icon button with a vertical three dot icon"
+      (click)="closeDialog()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</h2>
+
+<mat-card-content>
+  <mat-form-field appearance="standard">
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input />
+  </mat-form-field>
+  <div class="mat-elevation-z8">
+    <div class="table-container mat-elevation-z0">
+      <table
+        mat-table
+        [dataSource]="transactionsDataSource"
+        matSort
+        style="width: 100%"
+      >
+        <ng-container matColumnDef="fechaUltimaAct" [sticky]="false">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Fecha última actualización
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.fechaUltimaAct }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="monto" [sticky]="false">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Monto</th>
+          <td mat-cell *matCellDef="let element">
+            {{
+              element.monto
+                ? (element.monto | moneyPipe)
+                : (element.saldo | moneyPipe)
+            }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="numeroCuenta" [sticky]="false">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Número de cuenta
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.numeroCuenta }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="terminal" [sticky]="false">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Teminal</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.terminal }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="tipo" [sticky]="false">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Tipo de transaccion
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.tipo }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="usuario" [stickyEnd]="true">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.usuario }}
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="transactionsDisplayedColumns; sticky: true"
+        ></tr>
+
+        <tr
+          mat-row
+          *matRowDef="let row; columns: transactionsDisplayedColumns"
+        ></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="16">No se encontraron resultados.</td>
+        </tr>
+      </table>
+    </div>
+    <mat-paginator
+      [pageSizeOptions]="[100, 200, 500]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
+  </div>
+</mat-card-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="warn" (click)="closeDialog()">CERRAR</button>
+</mat-dialog-actions>

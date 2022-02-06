@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ErrorExpiredComponent } from 'src/app/admin/components/error-expired/error-expired.component';
 import { SavingAccountsService } from 'src/app/admin/services/saving-accounts.service';
+import { LoginService } from 'src/app/auth/services/login.service';
 import { SavingAccountsGettersFields } from 'src/app/shared/getters/saving-accounts-getters';
+import { RegExpValidation } from 'src/app/shared/regex/regex';
 
 @Component({
   selector: 'app-create-saving-accounts',
@@ -29,7 +31,7 @@ export class CreateSavingAccountsComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private savingAccountsService: SavingAccountsService,
     private dialog: MatDialog,
-    private router: Router
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +45,13 @@ export class CreateSavingAccountsComponent implements OnInit, OnDestroy {
       fechaUltimaAct: [null, [Validators.required]],
       idCliente: [null, [Validators.required]],
       numeroCuenta: [null, [Validators.required]],
-      saldo: [null, [Validators.required]],
+      saldo: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(RegExpValidation.onlyNumbersFloats),
+        ],
+      ],
     });
     this.validateField = new SavingAccountsGettersFields(this.formData);
   }
@@ -64,7 +72,6 @@ export class CreateSavingAccountsComponent implements OnInit, OnDestroy {
           this.dialogRef.close(true);
         },
         ({ error }) => {
-          if ('Auth token is expired' === error.error) {
             this.dialogRef.close(true);
             const dialogRef = this.dialog.open(ErrorExpiredComponent, {
               maxWidth: '100vw',
@@ -75,10 +82,9 @@ export class CreateSavingAccountsComponent implements OnInit, OnDestroy {
 
             this.subscription.add(
               dialogRef.afterClosed().subscribe((result) => {
-                this.router.navigate(['/login']);
+                this.loginService.logout();
               })
             );
-          }
         }
       );
   }
@@ -102,6 +108,6 @@ export class CreateSavingAccountsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.subscription.unsubscribe();
   }
 }
