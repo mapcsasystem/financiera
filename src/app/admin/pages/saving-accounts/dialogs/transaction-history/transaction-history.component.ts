@@ -90,6 +90,39 @@ export class TransactionHistoryComponent
         );
       }
     );
+
+    //   this.savingAccountsService.getAllTransacions().subscribe(
+    //     {
+    //       next: (resp) => {
+    //         const auxRes = { ...resp };
+    //         if (resp) {
+    //           for (let iterator of Object.keys(auxRes)) {
+    //             auxRes[iterator].id = iterator;
+    //             this.transactions.push(auxRes[iterator]);
+    //           }
+    //           this.transactionsDataSource.data = [...this.transactions];
+    //           this.transactions = [...this.transactions];
+    //         }
+    //         this.transactionsDataSource.sort = this.sort;
+    //         console.log(this.transactions);
+    //       },
+    //       error: (e) => {
+    //         const dialogRef = this.dialog.open(ErrorExpiredComponent, {
+    //           maxWidth: '100vw',
+    //           maxHeight: '100vh',
+    //           // height: '95%',
+    //           width: '80%',
+    //         });
+
+    //         this.subscription.add(
+    //           dialogRef.afterClosed().subscribe((result) => {
+    //             this.loginService.logout();
+    //           })
+    //         );
+    //       },
+    //       complete: () => console.info('complete')
+    //   }
+    // );
   }
 
   async ngAfterViewInit() {
