@@ -72,7 +72,6 @@ export class CreateSavingAccountsComponent implements OnInit, OnDestroy {
           this.dialogRef.close(true);
         },
         ({ error }) => {
-          if ('Auth token is expired' === error.error) {
             this.dialogRef.close(true);
             const dialogRef = this.dialog.open(ErrorExpiredComponent, {
               maxWidth: '100vw',
@@ -86,7 +85,6 @@ export class CreateSavingAccountsComponent implements OnInit, OnDestroy {
                 this.loginService.logout();
               })
             );
-          }
         }
       );
   }

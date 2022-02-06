@@ -15,8 +15,7 @@ export const environment = {
     transactions: {
       url: 'https://mibanco-333616-default-rtdb.firebaseio.com/transacciones',
     },
-    customers:
-      'https://us-central1-servicios-funerarios-sama.cloudfunctions.net/customers',
+    customers: 'https://us-central1-prueba-9c927.cloudfunctions.net/customers',
   },
 };
 

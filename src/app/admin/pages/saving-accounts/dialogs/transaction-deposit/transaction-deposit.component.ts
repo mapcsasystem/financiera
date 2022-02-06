@@ -36,7 +36,6 @@ export class TransactionDepositComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-    console.log(this.data);
   }
 
   initForm() {

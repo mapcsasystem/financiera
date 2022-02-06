@@ -127,7 +127,7 @@ export class SavingAccountsComponent
 
   openDialogGeneric(
     dialogOpen: string,
-    savingAccounts: SavingAccountsModel
+    savingAccounts?: SavingAccountsModel
   ): void {
     let dialogRef;
     switch (dialogOpen) {
@@ -154,11 +154,10 @@ export class SavingAccountsComponent
           maxHeight: '100vh',
           // height: '95%',
           width: '95%',
-          data: savingAccounts,
         });
         this.subscription.add(
           dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result: ${result}`);
+            // console.log(`Dialog result: ${result}`);
           })
         );
         break;
