@@ -73,7 +73,6 @@ export class TransactionHistoryComponent
           this.transactions = [...this.transactions];
         }
         this.transactionsDataSource.sort = this.sort;
-        console.log(this.transactions);
       },
       ({ error }) => {
         const dialogRef = this.dialog.open(ErrorExpiredComponent, {
